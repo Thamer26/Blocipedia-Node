@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <% include ../static/partials/head.ejs %>
+  </head>
+  
+  <body>
+    <% include ../static/partials/navbar.ejs %>
+
+    <main class="container">
+
+      <% include ../static/partials/messages.ejs %>
+
+      <h1>New Topic</h1>
+
+      <form action="/wikis/create" method="post">
+        <div class="form-group">
+          <label for="title">Wiki Title</label>
+          <input type="text" class="form-control" name="title" aria-describedby="titleHelp" placeholder="Enter Title">
+          <small class="text-muted" id="titleHelp">title must be 8 or more characters in length.</small>
+        </div>
+
+        <div class="form-group">
+          <label for="body">Wiki Body</label>
+          <textarea rows="4" class="form-control" name="body" placeholder="Enter Body"></textarea>
+          <small class="text-muted" id="titleHelp">Body must be 10 or more characters in length.</small>
+        </div>
+
+        <% if(currentUser.role !== "standard"){ %>
+          <div class="form-group">
+            <label for="private">Make this wiki private?</label>
+            <select classs = "form-control" name="private">
+              <option value = "true">Private Wiki</option>
+              <option value = "false">Public Wiki</option>
+            </select>
+          </div>
+
+        <% } %>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+      </form>
+
+    </main>
+    <% include ../static/partials/baseScripts.ejs %>
+
+  </body>
+
+</html>
